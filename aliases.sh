@@ -8,9 +8,16 @@ alias h='history'
 alias f='history | grep' # Use: f git
 alias r='rm -rIv ' # Recursive, informative verbose
 alias rmi='rm -i ' # Interactive delete
-alias cpw='pwd | clip' # Copy current path to Windows clipboard
-alias cpwl='pwd | xclip-selection clipboard' # Copy current path to Linux (Ubuntu/Debian) clipboard
-alias cpwl='pwd | wl-copy' # Copy current path to Linux (Fedora/Arch) clipboard
+
+# Smart Clipboard (Detects OS)
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    alias cpw='pwd | clip'
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    alias cpw='pwd | pbcopy'
+else
+    alias cpw='pwd | xclip -selection clipboard'
+fi
+
 alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc' # Open config in VSCode
@@ -40,9 +47,8 @@ alias f='--force'
 # --- Python Master Block ---
 alias p='python'
 alias mkv='python -m venv .venv'
-alias venv='source .venv/Scripts/activate || source venv/Scripts/activate'
+alias venv='source .venv/Scripts/activate || source .venv/bin/activate || source venv/Scripts/activate || source venv/bin/activate' # This covers Windows (Scripts) and Linux/Mac (bin)
 alias vno='deactivate'
-
 alias pi='pip install'
 alias pie='pip install -e .'
 alias pir='pip install -r requirements.txt'
