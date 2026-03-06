@@ -34,7 +34,7 @@ fi
 alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc'
-alias -v='--version'
+alias v='--version'
 
 # --- 2. GIT WORKFLOW --
 alias ga='git add '
@@ -168,6 +168,9 @@ __git_complete gd _git_diff
 __git_complete gl _git_log
 __git_complete gf _git_fetch
 __git_complete gsh _git_switch
+__git_complete grc _git_rebase
+__git_complete gcane _git_commit
 
 # --- 9. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
+
