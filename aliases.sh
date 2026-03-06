@@ -1,11 +1,20 @@
 # =================================================================
-# WODIBASH - MASTER ALIASES
+# WODIBASH - BULLETPROOF ALIASES
+
+#  _    _         _ _ ____            _
+# | |  | |       | (_)  _ \          | |
+# | |  | |  ___  | | | |_) )  __ _  _| |__
+# | |/\| | / _ \ | | |  _ <  / _` |/ __| '_ \
+# \  /\  /| (_) || | | |_) || (_| |\__ \ | | |
+#  \/  \/  \___/ |_|_|____/  \__,_||___/_| |_|
+
 # =================================================================
 
 # ---- 1. NAVIGATION & SYSTEM ----
 alias ..='cd ..'
 alias ...='cd ../..'
 alias l='ls'
+alias la='ls -a'
 alias cl='clear'
 alias cls='clear && ls'
 alias h='history'
@@ -25,7 +34,7 @@ fi
 alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc'
-alias v='--version'
+alias -v='--version'
 
 # --- 2. GIT WORKFLOW --
 alias ga='git add '
@@ -45,15 +54,36 @@ alias gf='git fetch'
 alias gco='git checkout'
 alias gch='git checkout -b '
 alias gsh='git switch -c '
+alias gt='git tag v'
+alias gpt='git push origin v'
+alias gtd='git tag -d v '
+alias gtdp='git push origin :refs/tags/v '
 alias force='--force'
+alias gst='git stash'
+alias gstp='git stash pop'
+alias gstl='git stash list'
+alias grb='git rebase'
+alias gri='git rebase -i'
+alias gres='git restore'
+alias grest='git restore --staged'   # unstage without losing changes
+alias gundo='git reset --soft HEAD~1'
+alias gdiff='git diff --stat'
+alias gcane='git commit --amend --no-edit'
+alias grc='git rebase --continue'
+alias gmain='git checkout main || git checkout master'
+alias gclean='git branch --merged | grep -v "\*\|main\|master\|dev" | xargs git branch -d'  # prune merged branches
+alias gping='ping github.com'
 
 # --- 3. PYTHON MASTER BLOCK ---
 alias p='python'
+alias p312='/c/Users/Lenovo/AppData/Local/Programs/Python/Python312/python.exe'
+alias p314='/c/Users/Lenovo/AppData/Local/Programs/Python/Python314/python.exe'
 alias mkv='python -m venv .venv'
 alias venv='source .venv/Scripts/activate || source .venv/bin/activate || source venv/Scripts/activate || source venv/bin/activate'
 alias vno='deactivate'
 alias pi='pip install'
 alias pie='pip install -e .'
+alias pyrm='pip uninstall -y'
 alias pir='pip install -r requirements.txt'
 alias pfr='pip freeze > requirements.txt'
 alias pu='pip list --outdated'
@@ -73,30 +103,53 @@ alias pyc='python -c'
 # --- 4. NPM & WEB DEV ---
 alias ni='npm install'
 alias nl='npm login'
+alias nrd='npm run dev'
+alias nrb='npm run build'
+alias nrt='npm run test'
 alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
 alias nclean='rm -rf dist/ build/ .next/ out/ .turbo/'
 alias nuke='find . -name "node_modules" -type d -prune -exec rm -rf "{}" + && find . -name "dist" -type d -prune -exec rm -rf "{}" + && find . -name "build" -type d -prune -exec rm -rf "{}" +'
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
+alias nup='npm update'
+alias pni='pnpm install'
+alias pnr='pnpm run'
+alias pna='pnpm add'
+alias pnx='pnpm dlx'
 
 # --- 5. VS CODE ---
 alias c='code'
 alias c.='code .'
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -sh *'                   # human-readable sizes in current dir
+alias tpath='echo $PATH | tr ":" "\n"' # readable PATH
+alias ports='ss -tulnp'              # what's listening (Linux) / lsof -i on mac
+alias myip='curl -s ifconfig.me'
+alias reload='exec $SHELL -l'        # full shell reload, cleaner than source
+alias mkcd='f(){ mkdir -p "$1" && cd "$1"; }; f'   # mkdir + cd in one
+alias bak='f(){ cp "$1" "$1.bak"; }; f'             # quick backup any file
 
-## ---6. AI ---- 
+## ---6. AI ----
 alias o='ollama'
 alias ol='ollama list'
-alias or='ollama run'
+alias olr='ollama run ' # for example or llama3 or glm-5:cloud
 alias oserve='ollama serve'
-alias orm='ollama rm'
-alias opull='ollama pull'
+alias olrm='ollama rm'
+alias olpull='ollama pull'
+
+export OLLAMA_API_BASE="http://localhost:11434" # tell Aider where Ollama lives
+alias ai='aider' # use pip install aider-chat
+alias aio='aider --model ollama/llama3' # run Aider with Llmma3 via Ollama
+alias aig='aider --model ollama/glm-5:cloud'
+alias aid='aider --model ollama/deepseek-coder-v2'
 
 # --- 7. TOOLS ---
 alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
-alias wl='wodilist'
-alias expl='explainthisrepo'
-alias fmtree='filemaptree'
+alias wl='wodilist' # pip install explainthisrepo
+alias expl='explainthisrepo' # pip install explainthisrepo
+alias fmtree='filemaptree' # pip install filemaptree
 
 # --- 8. GIT AUTOCOMPLETE ---
 if [ -f /usr/share/bash-completion/completions/git ]; then
