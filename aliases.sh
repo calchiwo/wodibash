@@ -1,5 +1,5 @@
 # =================================================================
-# WODIBASH - BULLETPROOF ALIASES
+# WODIBASH - BULLETPROOF TERMINAL ALIASES
 
 #  _    _         _ _ ____            _
 # | |  | |       | (_)  _ \          | |
@@ -21,6 +21,13 @@ alias h='history'
 alias fh='history | grep'
 alias r='rm -rIv '         # Recursive, informative verbose
 alias rmi='rm -i '         # Interactive delete
+alias h="--help || -h"
+
+alias nb='nano ~/.bashrc'
+alias sb='source ~/.bashrc'
+alias cnb='code ~/.bashrc'
+alias n='nano '
+alias v='--version'
 
 # Smart Clipboard (Detects OS)
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
@@ -30,11 +37,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
 else
     alias cpw='pwd | xclip -selection clipboard'
 fi
-
-alias nb='nano ~/.bashrc'
-alias sb='source ~/.bashrc'
-alias cnb='code ~/.bashrc'
-alias v='--version'
 
 # --- 2. GIT WORKFLOW --
 alias ga='git add '
@@ -73,6 +75,7 @@ alias grc='git rebase --continue'
 alias gmain='git checkout main || git checkout master'
 alias gclean='git branch --merged | grep -v "\*\|main\|master\|dev" | xargs git branch -d'  # prune merged branches
 alias gping='ping github.com'
+alias g='git'
 
 # --- 3. PYTHON MASTER BLOCK ---
 alias p='python'
@@ -87,12 +90,10 @@ alias pyrm='pip uninstall -y'
 alias pir='pip install -r requirements.txt'
 alias pfr='pip freeze > requirements.txt'
 alias pu='pip list --outdated'
-
 alias pyb='rm -rf dist/ build/ *.egg-info && python -m build'
 alias pyl='python -m twine register'
 alias ppub='python -m twine upload dist/*'
 alias pclean='find . -type d -name "__pycache__" -exec rm -rf {} +; find . -type f -name "*.pyc" -delete; rm -rf .pytest_cache .coverage .mypy_cache .ipynb_checkpoints'
-
 alias pyformat='python -m isort . && python -m black .'
 alias pylint='python -m pyflakes .'
 alias pyt='pytest'
@@ -131,11 +132,11 @@ alias reload='exec $SHELL -l'        # full shell reload, cleaner than source
 alias mkcd='f(){ mkdir -p "$1" && cd "$1"; }; f'   # mkdir + cd in one
 alias bak='f(){ cp "$1" "$1.bak"; }; f'             # quick backup any file
 
-## ---6. AI ----
+## --- 6. AI ----
 alias o='ollama'
 alias ol='ollama list'
 alias olr='ollama run ' # for example or llama3 or glm-5:cloud
-alias oserve='ollama serve'
+alias olserve='ollama serve'
 alias olrm='ollama rm'
 alias olpull='ollama pull'
 
@@ -173,4 +174,3 @@ __git_complete gcane _git_commit
 
 # --- 9. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
-
