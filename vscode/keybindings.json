@@ -1,0 +1,73 @@
+[
+    // --- TERMINAL CONTROL (Fast access to Wodibash) ---
+    {
+        "key": "ctrl+`",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.terminal.new"
+    },
+
+    // --- NAVIGATION (Focusing on the file, not the UI) ---
+    {
+        "key": "ctrl+b",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.nextEditor"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.previousEditor"
+    },
+
+    // --- Manual formatting & search ---
+    {
+        "key": "ctrl+f",
+        "command": "actions.find"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.findInFiles"
+    },
+    {
+        "key": "alt+shift+f",
+        "command": "editor.action.formatDocument" 
+    },
+
+    // --- ZEN MODE (Total Immersion) ---
+    {
+        "key": "ctrl+k z",
+        "command": "workbench.action.toggleZenMode"
+    },
+
+    // --- EDITOR SPLITTING (Multi-file development) ---
+    {
+        "key": "ctrl+/",
+        "command": "workbench.action.splitEditor"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "workbench.action.closeActiveEditor"
+    },
+
+    // --- REMOVE ANNOYANCES (Disabling keys that trigger unwanted popups) ---
+    {
+        "key": "ctrl+space",
+        "command": "-editor.action.triggerSuggest"
+    },
+    {
+        "key": "f12",
+        "command": "-editor.action.revealDefinition"
+    }
+]
