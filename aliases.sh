@@ -17,17 +17,17 @@ alias l='ls'
 alias la='ls -a'
 alias cl='clear'
 alias cls='clear && ls'
-alias h='history'
+alias hy='history'
 alias fh='history | grep'
 alias r='rm -rIv '         # Recursive, informative verbose
 alias rmi='rm -i '         # Interactive delete
-alias h="--help || -h"
+alias [-h]="--help || -h"
 
 alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc'
 alias n='nano '
-alias v='--version'
+alias [-v]='--version || -v'
 
 # Smart Clipboard (Detects OS)
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
@@ -73,6 +73,7 @@ alias grc='git rebase --continue'
 alias gres='git restore'
 alias grest='git restore --staged'   # unstage without losing changes
 alias gundo='git reset --soft HEAD~1'
+alias gresom='git reset origin/main'
 alias gdiff='git diff --stat'
 alias gmain='git checkout main || git checkout master'
 alias gclean='git branch --merged | grep -v "\*\|main\|master\|dev" | xargs git branch -d'  # prune merged branches
@@ -86,7 +87,7 @@ alias p314='/c/Users/Lenovo/AppData/Local/Programs/Python/Python314/python.exe'
 alias mkv='python -m venv .venv'
 alias venv='source .venv/Scripts/activate || source .venv/bin/activate || source venv/Scripts/activate || source venv/bin/activate'
 alias vno='deactivate'
-alias pi='pip install'
+alias pi='pip install '
 alias pie='pip install -e .'
 alias pyrm='pip uninstall -y'
 alias pir='pip install -r requirements.txt'
@@ -151,7 +152,7 @@ alias aid='aider --model ollama/deepseek-coder-v2'
 # --- 7. TOOLS ---
 alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
 alias wl='wodilist' # pip install explainthisrepo
-alias expl='explainthisrepo' # pip install explainthisrepo
+alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
 
 # --- 8. GIT AUTOCOMPLETE ---
