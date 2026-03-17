@@ -130,6 +130,19 @@ alias pnr='pnpm run'
 alias pna='pnpm add'
 alias pnx='pnpm dlx'
 
+# --- RUST/CARGO ---
+alias cb='cargo build'
+alias cr='cargo run'
+alias ct='cargo test'
+alias ctv='cargo test -- --nocapture'
+alias cc='cargo check'
+alias ccl='cargo clippy'
+alias crel='cargo build --release'
+alias cfmt='cargo fmt'
+alias cdoc='cargo doc --open'
+alias cnew='cargo new'
+alias cadd='cargo add'
+
 # --- 5. VS CODE ---
 alias c='code'
 alias c.='code .'
