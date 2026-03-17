@@ -171,6 +171,11 @@ alias aig='aider --model ollama/glm-5:cloud'
 alias aid='aider --model ollama/deepseek-coder-v2'
 
 # --- 7. TOOLS ---
+alias rg='rg --color=auto'
+alias fd='fd --color=auto'
+alias rgpy='rg --type py'
+alias rgts='rg --type ts'
+
 alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
 alias wl='wodilist' # pip install explainthisrepo
 alias etr='explainthisrepo' # pip install explainthisrepo
