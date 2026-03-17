@@ -80,6 +80,14 @@ alias gclean='git branch --merged | grep -v "\*\|main\|master\|dev" | xargs git 
 alias gping='ping github.com'
 alias g='git'
 
+# --- GITHUB CLI ---
+alias ghpr='gh pr create'
+alias ghprl='gh pr list'
+alias ghprv='gh pr view --web'
+alias ghrn='gh release create'
+alias ghrl='gh release list'
+alias ghre='gh repo view --web'
+
 # --- 3. PYTHON MASTER BLOCK ---
 alias p='python'
 alias p312='/c/Users/Lenovo/AppData/Local/Programs/Python/Python312/python.exe'
