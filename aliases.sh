@@ -164,6 +164,9 @@ alias reload='exec $SHELL -l'        # full shell reload, cleaner than source
 alias mkcd='f(){ mkdir -p "$1" && cd "$1"; }; f'   # mkdir + cd in one
 alias bak='f(){ cp "$1" "$1.bak"; }; f'             # quick backup any file
 
+# alias >='>' #That truncates a file to zero bytes while keeping it in place
+alias empty='f(){ > "$1"; }; f'
+
 ## --- 6. AI ----
 alias o='ollama'
 alias ol='ollama list'
