@@ -79,6 +79,9 @@ alias gmain='git checkout main || git checkout master'
 alias gclean='git branch --merged | grep -v "\*\|main\|master\|dev" | xargs git branch -d'  # prune merged branches
 alias gping='ping github.com'
 alias g='git'
+alias ginit='git init && git add . && git commit -m "Initial commit"'
+alias newpy='mkv && venv && pip install --upgrade pip'
+alias readme='touch README.md && code README.md'
 
 # --- GITHUB CLI ---
 alias ghpr='gh pr create'
