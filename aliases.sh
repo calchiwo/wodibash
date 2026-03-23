@@ -74,6 +74,7 @@ alias grc='git rebase --continue'
 alias gres='git restore'
 alias grest='git restore --staged'   # unstage without losing changes
 alias gundo='git reset --soft HEAD~1'
+alias gresh='git reset --hard origin/main'
 alias gresom='git reset origin/main'
 alias gdiff='git diff --stat'
 alias gmain='git checkout main || git checkout master'
