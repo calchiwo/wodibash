@@ -189,7 +189,6 @@ alias fd='fd --color=auto'
 alias rgpy='rg --type py'
 alias rgts='rg --type ts'
 
-alias mk='make'
 alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
 alias wl='wodilist' # pip install explainthisrepo
 alias etr='explainthisrepo' # pip install explainthisrepo
