@@ -194,6 +194,8 @@ alias wl='wodilist' # pip install explainthisrepo
 alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
 
+alias loopmusic='while true; do play musicname.mp3; done'
+
 # --- 8. GIT AUTOCOMPLETE ---
 if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git
