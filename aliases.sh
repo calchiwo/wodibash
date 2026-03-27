@@ -194,8 +194,18 @@ alias wl='wodilist' # pip install explainthisrepo
 alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
 
-# Looping music
+# -- Looping music --
 loopmusic() {
+    if [ -z "$1" ]; then
+        echo "Usage: loopmusic <file>"
+        return 1
+    fi
+
+    if [ ! -f "$1" ]; then
+        echo "File not found: $1"
+        return 1
+    fi
+
     while true; do
         play "$1"
     done
