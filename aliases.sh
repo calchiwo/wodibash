@@ -56,6 +56,7 @@ alias gf='git fetch'
 alias gco='git checkout'
 alias gch='git checkout -b '
 alias gsh='git switch -c '
+alias gsw='git switch'
 alias gt='git tag v'
 alias gpt='git push origin v'
 alias gtd='git tag -d v '
@@ -73,10 +74,11 @@ alias grc='git rebase --continue'
 alias gres='git restore'
 alias grest='git restore --staged'   # unstage without losing changes
 alias gundo='git reset --soft HEAD~1'
+alias gresh='git reset --hard origin/main'
 alias gresom='git reset origin/main'
 alias gdiff='git diff --stat'
 alias gmain='git checkout main || git checkout master'
-alias gclean='git branch --merged | grep -v "\*\|main\|master\|dev" | xargs git branch -d'  # prune merged branches
+alias gclean='git clean -fd'
 alias gping='ping github.com'
 alias g='git'
 alias ginit='git init && git add . && git commit -m "Initial commit"'
@@ -192,6 +194,23 @@ alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,di
 alias wl='wodilist' # pip install explainthisrepo
 alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
+
+# -- Looping music --
+loopmusic() {
+    if [ -z "$1" ]; then
+        echo "Usage: loopmusic <file>"
+        return 1
+    fi
+
+    if [ ! -f "$1" ]; then
+        echo "File not found: $1"
+        return 1
+    fi
+
+    while true; do
+        play "$1"
+    done
+}
 
 # --- 8. GIT AUTOCOMPLETE ---
 if [ -f /usr/share/bash-completion/completions/git ]; then

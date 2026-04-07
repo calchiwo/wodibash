@@ -27,7 +27,7 @@ WodiBash is a `.bashrc` terminal configuration, I wrote it for developers who wa
 
 ## How to use
 
-### For Windows (Git Bash)/Linux
+### For Windows (Git Bash)/Linux/Termux
 
  * Open your terminal and type:
 
@@ -57,6 +57,14 @@ nano ~/.zshrc
 ```bash
 source ~/.zshrc
 ```
+## Quick Install
+
+# For Bash
+curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.bashrc && source ~/.bashrc
+
+# For Zsh (macOS)
+curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.zshrc && source ~/.zshrc
+
 
 ## Cheat sheet
 
