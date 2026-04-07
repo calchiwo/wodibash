@@ -82,6 +82,7 @@ alias g='git'
 alias ginit='git init && git add . && git commit -m "Initial commit"'
 alias newpy='mkv && venv && pip install --upgrade pip'
 alias readme='touch README.md && code README.md'
+alias gi='git init'
 
 # --- GITHUB CLI ---
 alias ghpr='gh pr create'
