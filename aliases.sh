@@ -38,6 +38,12 @@ else
     alias cpw='pwd | xclip -selection clipboard'
 fi
 
+elif [[ -n "$PREFIX" && "$PREFIX" == *termux* ]]; then
+    alias cpw='pwd | termux-clipboard-set'
+else
+    alias cpw='pwd | xclip -selection clipboard'
+fi
+
 # --- 2. GIT WORKFLOW --
 alias ga='git add '
 alias gc='git commit -m'
