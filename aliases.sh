@@ -159,13 +159,15 @@ alias tpath='echo $PATH | tr ":" "\n"' # readable PATH
 
 alias ports='ss -tulnp'              # what's listening (Linux) / lsof -i on mac
 alias whatsport='lsof -i'           # or ss -tulnp already there, but this is cross-platform
-alias killport='f(){ kill -9 $(lsof -ti:$1); }; f'
 alias psg='ps aux | grep'
 
 alias myip='curl -s ifconfig.me'
 alias reload='exec $SHELL -l'        # full shell reload, cleaner than source
-alias mkcd='f(){ mkdir -p "$1" && cd "$1"; }; f'   # mkdir + cd in one
-alias bak='f(){ cp "$1" "$1.bak"; }; f'             # quick backup any file
+
+mkcd() { mkdir -p "$1" && cd "$1"; }  # mkdir + cd in one
+bak()  { cp "$1" "$1.bak"; }  # quick backup any file
+empty() { > "$1"; }
+killport() { kill -9 $(lsof -ti:"$1"); }
 
 # alias >='>' #That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
