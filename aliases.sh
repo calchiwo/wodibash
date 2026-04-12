@@ -21,13 +21,13 @@ alias hy='history'
 alias fh='history | grep'
 alias r='rm -rIv '         # Recursive, informative verbose
 alias rmi='rm -i '         # Interactive delete
-alias [-h]="--help || -h"
+v() { "$@" --version; }
+h() { "$@" --help; }
 
 alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc'
 alias n='nano '
-alias [-v]='--version || -v'
 
 # Smart Clipboard (Detects OS)
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
