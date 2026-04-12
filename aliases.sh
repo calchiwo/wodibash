@@ -213,24 +213,40 @@ loopmusic() {
 }
 
 # --- 8. GIT AUTOCOMPLETE ---
-if [ -f /usr/share/bash-completion/completions/git ]; then
-    . /usr/share/bash-completion/completions/git
+_git_completion_loaded=false
+
+# Try all known paths (Linux distros, macOS Homebrew, Termux)
+for _git_comp_path in \
+    /usr/share/bash-completion/completions/git \
+    /usr/local/share/bash-completion/completions/git \
+    /opt/homebrew/etc/bash_completion.d/git \
+    "${PREFIX}/share/bash-completion/completions/git"; do
+    if [ -f "$_git_comp_path" ]; then
+        . "$_git_comp_path"
+        _git_completion_loaded=true
+        break
+    fi
+done
+
+# Only wire up aliases if __git_complete was actually defined
+if $_git_completion_loaded && command -v __git_complete &>/dev/null; then
+    __git_complete ga  _git_add
+    __git_complete gc  _git_commit
+    __git_complete gco _git_checkout
+    __git_complete gch _git_checkout
+    __git_complete gp  _git_push
+    __git_complete gpo _git_push
+    __git_complete gpl _git_pull
+    __git_complete gs  _git_status
+    __git_complete gd  _git_diff
+    __git_complete gl  _git_log
+    __git_complete gf  _git_fetch
+    __git_complete gsh _git_switch
+    __git_complete grc _git_rebase
+    __git_complete gcane _git_commit
 fi
 
-__git_complete ga _git_add
-__git_complete gc _git_commit
-__git_complete gco _git_checkout
-__git_complete gch _git_checkout
-__git_complete gp _git_push
-__git_complete gpo _git_push
-__git_complete gpl _git_pull
-__git_complete gs _git_status
-__git_complete gd _git_diff
-__git_complete gl _git_log
-__git_complete gf _git_fetch
-__git_complete gsh _git_switch
-__git_complete grc _git_rebase
-__git_complete gcane _git_commit
+unset _git_comp_path _git_completion_loaded
 
 # --- 9. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
