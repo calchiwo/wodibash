@@ -60,11 +60,13 @@ source ~/.zshrc
 ## Quick Install
 
 # For Bash
+```bash
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.bashrc && source ~/.bashrc
-
+```
 # For Zsh (macOS)
+```zsh
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.zshrc && source ~/.zshrc
-
+```
 
 ## Cheat sheet
 
