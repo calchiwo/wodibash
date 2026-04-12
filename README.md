@@ -44,6 +44,12 @@ source ~/.bashrc
 
 However, you can use one of the aliases included in this set!: `sb`
 
+Fastest setup;
+
+```bash
+git clone https://github.com/calchiwo/wodibash.git && cp wodibash/aliases.sh .bashrc && source .bashrc
+```
+
 ### macOS
 
  * Open your config:
@@ -57,13 +63,22 @@ nano ~/.zshrc
 ```bash
 source ~/.zshrc
 ```
+
+Fastest setup;
+
+```zsh
+git clone https://github.com/calchiwo/wodibash.git && cp wodibash/aliases.sh .zshrc && source .zshrc
+```
+
 ## Quick Install
 
-# For Bash
+### For Bash
+
 ```bash
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.bashrc && source ~/.bashrc
 ```
-# For Zsh (macOS)
+### For Zsh (macOS)
+
 ```zsh
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.zshrc && source ~/.zshrc
 ```
@@ -88,6 +103,8 @@ curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~
 
 Found a way to make these even more "bulletproof"? Pull requests are welcome!
 
+## LICENSE
+MIT
 
 ## Authour
 [Caleb Wodi](https://github.com/calchiwo)
