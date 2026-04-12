@@ -151,6 +151,18 @@ alias cdoc='cargo doc --open'
 alias cnew='cargo new'
 alias cadd='cargo add'
 
+wodibashupdate() {
+    if [ -d ~/wodibash ]; then
+        git -C ~/wodibash pull
+    else
+        git clone https://github.com/calchiwo/wodibash.git ~/wodibash
+        # Alternative: git -C ~/wodibash fetch && git -C ~/wodibash reset --hard origin/main
+    fi
+    cp ~/wodibash/aliases.sh ~/.bashrc && \
+    source ~/.bashrc && \
+    echo "wodibash updated!"
+}
+
 # --- 5. VS CODE ---
 alias c='code'
 alias c.='code .'
