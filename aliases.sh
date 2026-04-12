@@ -1,3 +1,5 @@
+# --- WODIBASH START ---
+
 # =================================================================
 # WODIBASH - BULLETPROOF TERMINAL ALIASES
 
@@ -152,14 +154,38 @@ alias cnew='cargo new'
 alias cadd='cargo add'
 
 wodibashupdate() {
+    # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
         git -C ~/wodibash pull
+        # Alternative: git -C ~/wodibash fetch && git -C ~/wodibash reset --hard origin/main
     else
         git clone https://github.com/calchiwo/wodibash.git ~/wodibash
-        # Alternative: git -C ~/wodibash fetch && git -C ~/wodibash reset --hard origin/main
     fi
-    cp ~/wodibash/aliases.sh ~/.bashrc && \
-    source ~/.bashrc && \
+
+    local bashrc=~/.bashrc
+    local new_content=~/wodibash/aliases.sh
+    local start="# --- WODIBASH START ---"
+    local end="# --- WODIBASH END ---"
+
+    # Backup before touching anything
+    cp "$bashrc" "$bashrc.bak"
+
+    if ! grep -q "$start" "$bashrc"; then
+        # First time: markers don't exist yet, append the whole block
+        echo "" >> "$bashrc"
+        cat "$new_content" >> "$bashrc"
+    else
+        # Markers exist: replace only what's between them, touch nothing else
+        local tmp
+        tmp=$(mktemp)
+        awk -v start="$start" -v end="$end" -v content="$new_content" '
+            $0 == start { print; while ((getline line < content) > 0) print line; in_block=1; next }
+            $0 == end   { in_block=0 }
+            !in_block   { print }
+        ' "$bashrc" > "$tmp" && mv "$tmp" "$bashrc"
+    fi
+
+    source "$bashrc"
     echo "wodibash updated!"
 }
 
@@ -266,3 +292,5 @@ unset _git_comp_path _git_completion_loaded
 
 # --- 9. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
+
+# --- WODIBASH END ---
