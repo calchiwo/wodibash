@@ -34,10 +34,6 @@ if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
     alias cpw='pwd | clip'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     alias cpw='pwd | pbcopy'
-else
-    alias cpw='pwd | xclip -selection clipboard'
-fi
-
 elif [[ -n "$PREFIX" && "$PREFIX" == *termux* ]]; then
     alias cpw='pwd | termux-clipboard-set'
 else
