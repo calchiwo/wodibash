@@ -202,7 +202,7 @@ alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
 
 # -- Looping music --
-loopmusic() {
+function loopmusic() {
     if [ -z "$1" ]; then
         echo "Usage: loopmusic <file>"
         return 1
