@@ -114,7 +114,9 @@ alias pu='pip list --outdated'
 alias pyb='rm -rf dist/ build/ *.egg-info && python -m build'
 alias pyl='python -m twine register'
 alias ppub='python -m twine upload dist/*'
+
 alias pclean='find . -type d -name "__pycache__" -exec rm -rf {} +; find . -type f -name "*.pyc" -delete; rm -rf .pytest_cache .coverage .mypy_cache .ipynb_checkpoints build/ dist/ *.egg-info .eggs/'
+
 alias pyformat='python -m isort . && python -m black .'
 alias pylint='python -m pyflakes .'
 alias pyt='pytest'
@@ -130,6 +132,7 @@ alias nrb='npm run build'
 alias nrt='npm run test'
 alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
+
 nclean() {
     read -rp "Delete all node_modules/dist/build in $(pwd)? [y/N] " confirm
     if [[ "$confirm" == [yY] ]]; then
@@ -138,13 +141,10 @@ nclean() {
         find . -name "build" -type d -prune -exec rm -rf "{}" + && \
         find . -name ".next" -type d -prune -exec rm -rf "{}" + && \
         find . -name "out" -type d -prune -exec rm -rf "{}" + && \
-        find . -name ".turbo" -type d -prune -exec rm -rf "{}" + &&
+        find . -name ".turbo" -type d -prune -exec rm -rf "{}" +
     fi
 }
 
-        find . -name "build" -type d -prune -exec rm -rf "{}" +
-    fi
-}
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
 alias nup='npm update'
