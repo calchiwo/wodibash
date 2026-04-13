@@ -131,7 +131,14 @@ alias nrt='npm run test'
 alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
 alias nclean='rm -rf dist/ build/ .next/ out/ .turbo/'
-alias nuke='find . -name "node_modules" -type d -prune -exec rm -rf "{}" + && find . -name "dist" -type d -prune -exec rm -rf "{}" + && find . -name "build" -type d -prune -exec rm -rf "{}" +'
+nuke() {
+    read -rp "Delete all node_modules/dist/build in $(pwd)? [y/N] " confirm
+    if [[ "$confirm" == [yY] ]]; then
+        find . -name "node_modules" -type d -prune -exec rm -rf "{}" + && \
+        find . -name "dist" -type d -prune -exec rm -rf "{}" + && \
+        find . -name "build" -type d -prune -exec rm -rf "{}" +
+    fi
+}
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
 alias nup='npm update'
