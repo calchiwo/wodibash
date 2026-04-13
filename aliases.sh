@@ -130,7 +130,6 @@ alias nrb='npm run build'
 alias nrt='npm run test'
 alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
-
 nclean() {
     read -rp "Delete all node_modules/dist/build in $(pwd)? [y/N] " confirm
     if [[ "$confirm" == [yY] ]]; then
@@ -143,6 +142,9 @@ nclean() {
     fi
 }
 
+        find . -name "build" -type d -prune -exec rm -rf "{}" +
+    fi
+}
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
 alias nup='npm update'
