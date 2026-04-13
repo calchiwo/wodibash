@@ -115,7 +115,15 @@ alias pyb='rm -rf dist/ build/ *.egg-info && python -m build'
 alias pyl='python -m twine register'
 alias ppub='python -m twine upload dist/*'
 
-alias pclean='find . -type d -name "__pycache__" -exec rm -rf {} +; find . -type f -name "*.pyc" -delete; rm -rf .pytest_cache .coverage .mypy_cache .ipynb_checkpoints build/ dist/ *.egg-info .eggs/'
+pclean() {
+    read -rp "Clean all Python caches and build artifacts in $(pwd)? [y/N] " confirm
+    if [[ "$confirm" == [yY] ]]; then
+        find . -type d -name "__pycache__" -exec rm -rf {} +
+        find . -type f -name "*.pyc" -delete
+        rm -rf .pytest_cache .coverage .mypy_cache .ipynb_checkpoints build/ dist/ *.egg-info .eggs/
+        echo "Python environment cleaned!"
+    fi
+}
 
 alias pyformat='python -m isort . && python -m black .'
 alias pylint='python -m pyflakes .'
@@ -134,7 +142,7 @@ alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
 
 nclean() {
-    read -rp "Delete all node_modules/dist/build in $(pwd)? [y/N] " confirm
+    read -rp "Delete all node_modules/dist/build/next/out/turbo in $(pwd)? [y/N] " confirm
     if [[ "$confirm" == [yY] ]]; then
         find . -name "node_modules" -type d -prune -exec rm -rf "{}" + && \
         find . -name "dist" -type d -prune -exec rm -rf "{}" + && \
@@ -142,6 +150,7 @@ nclean() {
         find . -name ".next" -type d -prune -exec rm -rf "{}" + && \
         find . -name "out" -type d -prune -exec rm -rf "{}" + && \
         find . -name ".turbo" -type d -prune -exec rm -rf "{}" +
+        echo "Node environment cleaned!"
     fi
 }
 
