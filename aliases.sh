@@ -52,7 +52,15 @@ alias gd='git diff'
 alias gl='git log'
 alias glo='git log --oneline --graph --decorate'
 alias gp='git push'
-alias gpo='git push origin '
+
+gpo() {
+    if [ "$1" = "." ]; then
+        git push origin "$(git symbolic-ref --short HEAD)"
+    else
+        git push origin "$1"
+    fi
+}
+
 alias gpf='git push --force-with-lease'
 alias gpl='git pull'
 alias gcl='git clone'
