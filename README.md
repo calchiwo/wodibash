@@ -1,5 +1,3 @@
-# WodiBash
-
 ```
  _    _         _ _ ____            _
 | |  | |       | (_)  _ \          | |
@@ -9,102 +7,154 @@
  \/  \/  \___/ |_|_|____/  \__,_||___/_| |_|
 ```
 
-A Bulletproof Collection for Git, Python, NPM, and AI Workflows
+WodiBash turns multi-step workflows into single commands, eliminates repetitive typing, enforces safer defaults for destructive operations, and removes the need to remember long command sequences across:
 
-WodiBash is a `.bashrc` terminal configuration, I wrote it for developers who want to move faster in the terminal. It eliminates repetitive typing for common tasks in Git, Python packaging, Web Development, and Local LLMs.
+- Git & GitHub CLI (`gh`)
+- Python (`python`, `pip`, `venv`, packaging)
+- Node (`npm`, `pnpm`, `npx`)
+- Rust (Cargo)
+- AI (Ollama, Aider, Coding agents)
+- Navigation and system
+- Shell, processes and networking
+- Search tooling (`grep`, `rg`, `fd`)
 
-## What the set includes
+This is not a framework or a package, it's a working setup that grew from actual use.
 
- *  **Git God Mode**: Shortcuts for the entire workflow: from `ga` (add) to `gch` (branching) and `glo` (visual logs). Includes safety net aliases for tag management (`gt`, `gpt`).
+WodiBash is my personal terminal execution layer built and iterated over time. I wrote it for developers who want to move faster in the terminal. It compresses repetitive terminal workflows into single-keystroke actions and removes repetition, reduces failure surface, and standardizes how you work in the terminal.
 
- * **Python Master Block**: Automated Virtual Environments (`mkv`, `venv`), dependency management (`pfr`), and one-click PyPI publishing (`ppub`).
+## Features
 
- * **NPM Efficiency**: Clean builds (`nclean`) and a "nuclear option" (`nuke`) to reset `node_modules` across monorepos.
+- Git Workflow Compression
+Turns multi-step Git operations into single commands.
+`ga`, `gc`, `gch`, `gpo`, `gs`, `gp` remove repetitive typing across the full lifecycle
+`glo` gives immediate visual git log history (oneline + graph + decorate)
+`gundo`, `gresh`, `gclean` act as recovery and reset tools when things break
 
- * **AI Integration**: Quick-fire commands to run locall LLMs without needing paid API keys; Ollama (`ol`, `or `) and Aider (`aio`, `aid`, `ai`, `aig`).
- 
- * **Safety First**: Destructive commands like `r` (rm -rf) are aliased to be informative and interactive (`-riv`) to prevent accidental data loss.
+- Python Environment Control
+Eliminates setup friction and environment drift.
+mkv + venv standardize environment creation and activation
+`pfr`, `pir`, `pu` keep dependencies visible and controlled
+`pi`, `pyb`, `ppub` reduces PyPI publishing to one command
+
+- NPM & Web Dev: The commands you end up typing every day, cut down to a few keystrokes (`ni`, `nrd`, `nrb`, `nrt`, `pni`, `pnr`, `pna`, `pnx`) with `nclean` to bring projects back to a clean state and removes build artifacts and dependencies when systems start drifting
+
+- AI Integration: Quick commands for running LLM workflows. Ollama (`ol`, `olr`) without needing paid API keys and Aider (`aio`, `aid`, `ai`, `aig`) handle local and agent-based usage, while coding agents (`cod`, `cla`, `gem`, `cur`) for Codex, Claude Code CLI, Gemini CLI, and Cursor.
+
+- Safer Defaults for Dangerous Commands: Destructive commands made safer (`rm` becomes informative, interactive and verbose to prevent accidental loss)
+Alongside controlled cleanup commands  (`nclean`, `pclean`, `gclean`) to clean broken environments quickly
+
 
 ## How to use
 
-### For Windows (Git Bash)/Linux/Termux
+### For Linux (native Bash)/Windows via Git Bash (MINGW / MSYS)/Termux (Android)/macOS (via Bash)
 
- * Open your terminal and type:
+ - Open your terminal and type:
 
 ```bash
 nano ~/.bashrc
 ```
 
- * Copy the sets of the `aliases.sh` file from this repo and paste it at the bottom.
- * Save and refresh:
+- Copy the contents of `aliases.sh` file from this repo and paste it at the bottom into your shell config
+
+- Save and refresh:
 
 ```bash
 source ~/.bashrc
 ```
 
-However, you can use one of the aliases included in this set!: `sb`
+However, you can use one of the aliases: `sb`
 
 Fastest setup;
 
 ```bash
-git clone https://github.com/calchiwo/wodibash.git && cp wodibash/aliases.sh .bashrc && source .bashrc
+git clone https://github.com/calchiwo/wodibash.git && cat wodibash/aliases.sh >> ~/.bashrc && source ~/.bashrc
+wodibashupdate
 ```
 
-### macOS
+### macOS (via zsh)
 
- * Open your config:
+ - Open your config:
 
-```bash
+```zsh
 nano ~/.zshrc
 ```
 
- * Paste the aliases, then save, exit and reload:
+- Paste the aliases, then save, exit and reload:
 
-```bash
+```zsh
 source ~/.zshrc
 ```
 
 Fastest setup;
 
 ```zsh
-git clone https://github.com/calchiwo/wodibash.git && cp wodibash/aliases.sh .zshrc && source .zshrc
+git clone https://github.com/calchiwo/wodibash.git && cat wodibash/aliases.sh >> ~/.zshrc && source ~/.zshrc
+wodibashupdate
 ```
 
-## Quick Install
+## Other Installation
+
+<details>
 
 ### For Bash
 
 ```bash
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.bashrc && source ~/.bashrc
+wodibashupdate
 ```
+
 ### For Zsh (macOS)
 
 ```zsh
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.zshrc && source ~/.zshrc
+wodibashupdate
 ```
 
-## Cheat sheet
+</details>
 
-| Command | What it does |
-|---|---|
-| `helpme` | Print all active aliases grouped by category |
-| `gs` / `ga` / `gc` | `git status` / `git add` / `git commit -m` |
-| `glo` | Visual git log (oneline + graph + decorate) |
-| `gundo` | Undo last commit, keep changes staged |
-| `venv` | Activate `.venv` or `venv` (tries all common paths) |
-| `pclean` | Remove `__pycache__`, `.pyc`, pytest/mypy/coverage artifacts |
-| `nuke` | Recursively delete all `node_modules` and `dist` folders |
-| `aio` | Aider with local Ollama Llama3 |
-| `cpw` | Copy current path to clipboard |
-| `todo` | Grep for TODO / FIXME across the project |
-| .....and more in the set |
+## Discover commands
+
+After installation, you can see all available aliases with:
+
+```bash
+helpme
+```
+
+This prints all WodiBash commands in a grouped, readable format so you can quickly see what’s available.
+
+
+## Self Updates
+
+WodiBash includes a built-in self-update and safe reintegration command.
+
+After installation, you can update your setup at any time with:
+
+```bash
+wodibashupdate
+```
+
+This will pull the latest version and safely update your WodiBash block inside your shell config.
+
+## Philosophy
+WodiBash is not about shortcuts.
+
+It is about:
+- reducing repeated thinking
+- standardizing execution
+- making recovery fast when systems break or drift
+
+The terminal should not slow you down. It should execute exactly what you intend, immediately. That's what WodiBash solves.
 
 ## 🤝 Contributing
 
-Found a way to make these even more "bulletproof"? Pull requests are welcome!
+Found a way to make WodiBash even more "bulletproof"? Pull requests are welcome!
 
-## LICENSE
-MIT
+## License
 
-## Authour
-[Caleb Wodi](https://github.com/calchiwo)
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Caleb Wodi
+- [X/Twitter](https://x.com/calchiwo)
+- [LinkedIn](https://linkedIn.com/in/calchiwo)
