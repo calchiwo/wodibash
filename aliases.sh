@@ -21,16 +21,15 @@ alias lsl='ls -la'
 alias cl='clear'
 alias cls='clear && ls'
 alias hy='history'
-alias fh='history | grep'
 alias r='rm -rIv '         # Recursive, informative verbose
-alias rmi='rm -i '         # Interactive delete
+alias rm='rm -f -i '         # Interactive delete
 v() { "$@" --version; }
 h() { "$@" --help; }
 
+alias n='nano '
 alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc'
-alias n='nano '
 
 # Smart Clipboard (Detects OS)
 # copy current path to clipboard
