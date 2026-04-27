@@ -74,7 +74,6 @@ alias gt='git tag v'
 alias gpt='git push origin v'
 alias gtd='git tag -d v '
 alias gtdp='git push origin :refs/tags/v '
-alias force='--force'
 alias gst='git stash'
 alias gstp='git stash pop'
 alias gstl='git stash list'
@@ -94,10 +93,9 @@ alias gmain='git checkout main || git checkout master'
 alias gclean='git clean -fd'
 alias gping='ping github.com'
 alias g='git'
-alias ginit='git init && git add . && git commit -m "Initial commit"'
-alias newpy='mkv && venv && pip install --upgrade pip'
-alias readme='touch README.md && code README.md'
 alias gi='git init'
+alias ginit='git init && git add . && git commit -m "Initial commit"'
+alias readme='touch README.md && code README.md'
 
 # --- GITHUB CLI ---
 alias ghpr='gh pr create'
@@ -114,6 +112,7 @@ alias p314='/c/Users/Lenovo/AppData/Local/Programs/Python/Python314/python.exe'
 alias mkv='python -m venv .venv'
 alias venv='source .venv/Scripts/activate || source .venv/bin/activate || source venv/Scripts/activate || source venv/bin/activate'
 alias vno='deactivate'
+alias newpy='mkv && venv && pip install --upgrade pip'
 alias pi='pip install '
 alias pie='pip install -e .'
 alias pyrm='pip uninstall -y'
@@ -152,6 +151,7 @@ alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
 alias npack='npm pack'
 alias npdr='npm pack --dry-run'
+alias nup='npm update'
 
 nclean() {
     read -rp "Delete all node_modules/dist/build/next/out/turbo in $(pwd)? [y/N] " confirm
@@ -170,7 +170,6 @@ nclean() {
 # Web developement
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
-alias nup='npm update'
 
 # pnpm
 alias pni='pnpm install'
@@ -212,6 +211,7 @@ killport() { kill -9 $(lsof -ti:"$1"); }
 
 # alias >='>' #That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
+alias force='--force'
 
 ## --- 7. AI ----
 
