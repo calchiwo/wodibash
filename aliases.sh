@@ -143,6 +143,7 @@ alias pyc='python -c'
 # --- 4. NPM, PNPM & WEB DEV ---
 alias ni='npm install'
 alias nl='npm login'
+alias nlo='npm logout'
 alias nrd='npm run dev'
 alias nrb='npm run build'
 alias nrt='npm run test'
