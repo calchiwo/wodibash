@@ -32,6 +32,7 @@ alias cnb='code ~/.bashrc'
 alias n='nano '
 
 # Smart Clipboard (Detects OS)
+# copy current path to clipboard
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
     alias cpw='pwd | clip'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -85,7 +86,7 @@ alias gcane='git commit --amend --no-edit'
 alias grc='git rebase --continue'
 alias gres='git restore'
 alias grest='git restore --staged'   # unstage without losing changes
-alias gundo='git reset --soft HEAD~1'
+alias gundo='git reset --soft HEAD~1' # undo last commit, keep changes staged
 alias gresh='git reset --hard origin/main'
 alias gresom='git reset origin/main'
 alias gdiff='git diff --stat'
@@ -190,10 +191,9 @@ alias cdoc='cargo doc --open'
 alias cnew='cargo new'
 alias cadd='cargo add'
 
-# --- 6. VS CODE ---
+# --- 6. SHELL / PROCESSES / NETWORKING ---
 alias c='code'
 alias c.='code .'
-alias grep='grep --color=auto'
 alias df='df -h'
 alias du='du -sh *'                   # human-readable sizes in current dir
 alias tpath='echo $PATH | tr ":" "\n"' # readable PATH
@@ -215,12 +215,6 @@ alias empty='f(){ > "$1"; }; f'
 
 ## --- 7. AI ----
 
-# Agents
-alias cod='codex' # npm i -g @openai/codex
-alias cur='cursor-agent' # curl https://cursor.com/install -fsS | bash
-alias gem='gemini' # npm i -g @google/gemini-cli
-alias cla='claude' # npm i -g @anthropic-ai/claude-code (claude code cli)
-
 # Local LLM
 alias o='ollama'
 alias ol='ollama list'
@@ -229,19 +223,28 @@ alias olserve='ollama serve'
 alias olrm='ollama rm'
 alias olpull='ollama pull'
 
+# Aider
 export OLLAMA_API_BASE="http://localhost:11434" # tell Aider where Ollama lives
 alias ai='aider' # pip install aider-chat
 alias aio='aider --model ollama/llama3' # run Aider with Llmma3 via Ollama
 alias aig='aider --model ollama/glm-5:cloud'
 alias aid='aider --model ollama/deepseek-coder-v2'
 
+# Coding Agents
+alias cod='codex' # npm i -g @openai/codex
+alias cur='cursor-agent' # curl https://cursor.com/install -fsS | bash
+alias gem='gemini' # npm i -g @google/gemini-cli
+alias cla='claude' # npm i -g @anthropic-ai/claude-code (claude code cli)
+alias omo='oh-my-codex' #
+
 # --- 8. SEARCHING TOOLS ---
 alias rg='rg --color=auto'
 alias fd='fd --color=auto'
+alias grep='grep --color=auto'
 alias rgpy='rg --type py'
 alias rgts='rg --type ts'
-
 alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
+
 alias wl='wodilist' # pip install wodilist
 alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
