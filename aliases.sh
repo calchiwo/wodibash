@@ -1,7 +1,7 @@
 # --- WODIBASH START ---
 
 # =================================================================
-# WODIBASH - BULLETPROOF TERMINAL ALIASES
+# WODIBASH - BULLETPROOF TERMINAL WORKFLOWS ALIASES
 
 #  _    _         _ _ ____            _
 # | |  | |       | (_)  _ \          | |
@@ -140,7 +140,7 @@ alias pytv='pytest -v'
 alias pytx='pytest -x'
 alias pyc='python -c'
 
-# --- 4. NPM & WEB DEV ---
+# --- 4. NPM, PNPM & WEB DEV ---
 alias ni='npm install'
 alias nl='npm login'
 alias nrd='npm run dev'
@@ -163,15 +163,18 @@ nclean() {
     fi
 }
 
+# Web developement
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
 alias nup='npm update'
+
+# pnpm
 alias pni='pnpm install'
 alias pnr='pnpm run'
 alias pna='pnpm add'
 alias pnx='pnpm dlx'
 
-# --- RUST/CARGO ---
+# --- 5. RUST/CARGO ---
 alias cb='cargo build'
 alias cr='cargo run'
 alias ct='cargo test'
@@ -184,7 +187,7 @@ alias cdoc='cargo doc --open'
 alias cnew='cargo new'
 alias cadd='cargo add'
 
-# --- 5. VS CODE ---
+# --- 6. VS CODE ---
 alias c='code'
 alias c.='code .'
 alias grep='grep --color=auto'
@@ -207,7 +210,15 @@ killport() { kill -9 $(lsof -ti:"$1"); }
 # alias >='>' #That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
 
-## --- 6. AI ----
+## --- 7. AI ----
+
+# Agents
+alias cod='codex' # npm i -g @openai/codex
+alias cur='cursor-agent' # curl https://cursor.com/install -fsS | bash
+alias gem='gemini' # npm i -g @google/gemini-cli
+alias cla='claude' # npm i -g @anthropic-ai/claude-code (claude code cli)
+
+# Local LLM
 alias o='ollama'
 alias ol='ollama list'
 alias olr='ollama run ' # for example or llama3 or glm-5:cloud
@@ -216,23 +227,23 @@ alias olrm='ollama rm'
 alias olpull='ollama pull'
 
 export OLLAMA_API_BASE="http://localhost:11434" # tell Aider where Ollama lives
-alias ai='aider' # use pip install aider-chat
+alias ai='aider' # pip install aider-chat
 alias aio='aider --model ollama/llama3' # run Aider with Llmma3 via Ollama
 alias aig='aider --model ollama/glm-5:cloud'
 alias aid='aider --model ollama/deepseek-coder-v2'
 
-# --- 7. TOOLS ---
+# --- 8. SEARCHING TOOLS ---
 alias rg='rg --color=auto'
 alias fd='fd --color=auto'
 alias rgpy='rg --type py'
 alias rgts='rg --type ts'
 
 alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
-alias wl='wodilist' # pip install explainthisrepo
+alias wl='wodilist' # pip install wodilist
 alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
 
-# -- Looping music --
+# --- 9. LOOPING MUSIC ---
 function loopmusic() {
     if [ -z "$1" ]; then
         echo "Usage: loopmusic <file>"
@@ -249,7 +260,7 @@ function loopmusic() {
     done
 }
 
-# --- 8. GIT AUTOCOMPLETE ---
+# --- 10. GIT AUTOCOMPLETE ---
 _git_completion_loaded=false
 
 # Try all known paths (Linux distros, macOS Homebrew, Termux)
@@ -285,10 +296,10 @@ fi
 
 unset _git_comp_path _git_completion_loaded
 
-# --- 9. DASHBOARD ---
+# --- 11. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
-# --- 10. SELF UPDATE ---
+# --- 12. SELF UPDATE ---
 wodibashupdate() {
     # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
