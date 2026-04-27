@@ -148,6 +148,8 @@ alias nrb='npm run build'
 alias nrt='npm run test'
 alias ncheck='npm publish --dry-run'
 alias npub='npm publish'
+alias npack='npm pack'
+alias npdr='npm pack --dry-run'
 
 nclean() {
     read -rp "Delete all node_modules/dist/build/next/out/turbo in $(pwd)? [y/N] " confirm
