@@ -70,7 +70,15 @@ gpof() {
 }
 
 alias gpl='git pull'
-alias gcl='git clone'
+
+gcl() {
+    if [[ "$1" == */* && "$1" != *://* && "$1" != git@* ]]; then
+        git clone "git@github.com:$1.git"
+    else
+        git clone "$1"
+    fi
+}
+
 alias gf='git fetch'
 alias gco='git checkout'
 alias gch='git checkout -b '
