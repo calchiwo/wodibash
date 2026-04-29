@@ -1,7 +1,8 @@
 # --- WODIBASH START ---
 
 # =================================================================
-# WODIBASH - BULLETPROOF TERMINAL WORKFLOWS ALIASES
+# WODIBASH - BULLETPROOF TERMINAL ALIASES
+# THAT COMPRESSES EVERYDAY WORKFLOWS FOR FASTER, SAFER SYSTEM EXECUTION
 
 #  _    _         _ _ ____            _
 # | |  | |       | (_)  _ \          | |
