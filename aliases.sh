@@ -63,6 +63,11 @@ gpo() {
 }
 
 alias gpf='git push --force-with-lease'
+
+gpof() {
+    git push origin "$(git symbolic-ref --short HEAD)" --force-with-lease
+}
+
 alias gpl='git pull'
 alias gcl='git clone'
 alias gf='git fetch'
