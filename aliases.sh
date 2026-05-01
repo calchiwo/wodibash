@@ -218,6 +218,7 @@ alias psg='ps aux | grep'
 alias myip='curl -s ifconfig.me'
 alias reload='exec $SHELL -l'        # full shell reload, cleaner than source
 
+alias mk='mkdir'
 mkcd() { mkdir -p "$1" && cd "$1"; }  # mkdir + cd in one
 bak()  { cp "$1" "$1.bak"; }  # quick backup any file
 empty() { > "$1"; }
