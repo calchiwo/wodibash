@@ -259,7 +259,7 @@ alias fd='fd --color=auto'
 alias grep='grep --color=auto'
 alias rgpy='rg --type py'
 alias rgts='rg --type ts'
-alias todo='grep -rnw . -e "TODO" -e "FIXME" --exclude-dir={node_modules,.git,dist}'
+alias todo='grep -rnw . -e "TODO" -e "FIXME" -e "todo" -e "fixme" --exclude-dir={node_modules,.git,dist}'
 
 alias wl='wodilist' # pip install wodilist
 alias etr='explainthisrepo' # pip install explainthisrepo
