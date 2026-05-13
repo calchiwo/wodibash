@@ -103,6 +103,7 @@ alias grh='git rebase -i HEAD~'
 alias gcaid='git rebase --committer-date-is-author-date HEAD~'
 alias gcane='git commit --amend --no-edit'
 alias grc='git rebase --continue'
+alias grs='git repo structure' # reachable objects and repository structure
 alias gres='git restore'
 alias grest='git restore --staged '    # unstage file without losing changes
 alias gundo='git reset --soft HEAD~1' # undo last commit, keep changes staged
