@@ -111,6 +111,7 @@ alias g='git'
 alias gi='git init'
 alias ginit='git init && git add . && git commit -m "Initial commit"'
 alias readme='touch README.md && code README.md'
+alias license='touch LICENSE && code LICENSE'
 
 # --- GITHUB CLI ---
 alias ghpr='gh pr create'
@@ -217,6 +218,8 @@ alias df='df -h'
 alias du='du -sh *'                   # human-readable sizes in current dir
 alias tpath='echo $PATH | tr ":" "\n"' # readable PATH
 
+alias force='--force'
+
 alias ports='ss -tulnp'              # what's listening (Linux) / lsof -i on mac
 alias whatsport='lsof -i'           # or ss -tulnp already there, but this is cross-platform
 alias psg='ps aux | grep'
@@ -232,7 +235,6 @@ killport() { kill -9 $(lsof -ti:"$1"); }
 
 # alias >='>' #That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
-alias force='--force'
 
 ## --- 7. AI ----
 
