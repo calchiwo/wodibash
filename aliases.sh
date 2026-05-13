@@ -32,6 +32,10 @@ alias nb='nano ~/.bashrc'
 alias sb='source ~/.bashrc'
 alias cnb='code ~/.bashrc'
 
+alias nz='nano ~/.zshrc'
+alias sz='source ~/.zshrc'
+alias cnz='code ~/.zshrc'
+
 # Smart Clipboard (Detects OS)
 # copy current path to clipboard
 if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
