@@ -186,6 +186,11 @@ nclean() {
 alias cna='npx create-next-app'
 alias cra='npx create-react-app'
 
+alias fuman='npx create-fumadocs-app'
+alias fumap='pnpm create fumadocs-app'
+alias fumay='yarn create fumadocs-app'
+alias fumab='bun create fumadocs-app'
+
 # pnpm
 alias pni='pnpm install'
 alias pnr='pnpm run'
