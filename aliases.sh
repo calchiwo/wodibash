@@ -59,6 +59,7 @@ alias gds='gd --staged'
 alias gdiff='git diff --stat'
 alias gl='git log'
 alias glo='git log --oneline --graph --decorate'
+alias gb='git branch'
 alias gp='git push'
 
 gpo() {
