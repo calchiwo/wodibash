@@ -220,6 +220,8 @@ alias cadd='cargo add'
 # --- 6. SHELL / PROCESSES / NETWORKING ---
 alias c='code'
 alias c.='code .'
+
+alias open='termux-open' # Install with pkg install termux-api. See repo: github.com/termux/termux-api .I ran into this while trying to build a VS Code style CLI for Andriod editors (Pydriod, Acode, Spck editors etc) that opens files directly from the terminal using Andriod intents instead of manual repititive "Open with" selection.
 alias df='df -h'
 alias du='du -sh *'                   # human-readable sizes in current dir
 alias tpath='echo $PATH | tr ":" "\n"' # readable PATH
