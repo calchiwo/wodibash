@@ -406,7 +406,59 @@ alias cf='wrangler'
 alias cfd='wrangler deploy'
 alias cfl='wrangler login'
 
-# --- 11. GIT AUTOCOMPLETE ---
+# --- 11. SERVERS / VPS / SSH ---
+
+# SSH
+alias sshk='ssh-keygen -t ed25519'
+alias sshl='cat ~/.ssh/id_ed25519.pub'
+alias ssha='ssh-add ~/.ssh/id_ed25519'
+alias sshc='ssh-copy-id'
+
+# Linux server utilities
+alias srv='ssh ' # for example: srv root@myserver
+alias srvls='systemctl list-units --type=service'
+alias srvstart='sudo systemctl start'
+alias srvstop='sudo systemctl stop'
+alias srvrestart='sudo systemctl restart'
+alias srvstatus='sudo systemctl status'
+
+# Logs
+alias logs='journalctl -xe'
+alias logsf='journalctl -f'
+alias nginxlog='tail -f /var/log/nginx/access.log'
+alias errlog='tail -f /var/log/nginx/error.log'
+
+# Process managers
+alias pm='pm2'
+alias pml='pm2 list'
+alias pms='pm2 start'
+alias pmr='pm2 restart'
+alias pmd='pm2 delete'
+alias pmlog='pm2 logs'
+
+# Docker server workflows
+alias dkps='docker ps'
+alias dkimg='docker images'
+alias dkprune='docker system prune'
+alias dkre='docker restart'
+
+# Remote sync
+alias scpup='scp'
+alias rs='rsync -avz'
+
+# Quick Python server
+alias pyserve='python -m http.server'
+
+# Node local server
+alias nserve='npx serve'
+
+# Static file server
+servehere() {
+    local port=${1:-8000}
+    python -m http.server "$port"
+}
+
+# --- 12. GIT AUTOCOMPLETE ---
 _git_completion_loaded=false
 
 # Try all known paths (Linux distros, macOS Homebrew, Termux)
@@ -442,10 +494,10 @@ fi
 
 unset _git_comp_path _git_completion_loaded
 
-# --- 12. DASHBOARD ---
+# --- 13. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
-# --- 13. SELF UPDATE ---
+# --- 14. SELF UPDATE ---
 wodibashupdate() {
     # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
