@@ -120,6 +120,7 @@ alias readme='touch README.md && code README.md'
 alias license='touch LICENSE && code LICENSE'
 
 # --- GITHUB CLI ---
+# Install GitHub CLI: https://cli.github.com/
 alias ghpr='gh pr create'
 alias ghprl='gh pr list'
 alias ghprv='gh pr view --web'
@@ -334,7 +335,226 @@ function loopmusic() {
     done
 }
 
-# --- 10. GIT AUTOCOMPLETE ---
+# --- 10. CLOUD / DEPLOYMENT ---
+
+# Install:
+# npm i -g vercel
+# npm i -g netlify-cli
+# npm i -g firebase-tools
+# npm i -g wrangler
+# npm i -g @railway/cli
+# brew install supabase/tap/supabase
+# winget install Docker.DockerDesktop
+# Install GitHub CLI: https://cli.github.com/
+
+# Vercel
+alias vc='vercel'
+alias vcl='vercel login'
+alias vcd='vercel dev'
+alias vcp='vercel --prod'
+alias vclog='vercel logs'
+alias vcrm='vercel remove'
+
+# Netlify
+alias nt='netlify'
+alias ntd='netlify dev'
+alias ntp='netlify deploy'
+alias ntpp='netlify deploy --prod'
+alias ntl='netlify login'
+
+# Firebase
+alias fb='firebase'
+alias fbl='firebase login'
+alias fbi='firebase init'
+alias fbd='firebase deploy'
+alias fbh='firebase hosting:channel:deploy'
+
+# Supabase
+alias sup='supabase'
+alias sups='supabase start'
+alias supst='supabase status'
+alias supdb='supabase db push'
+alias supd='supabase deploy'
+
+# Docker
+alias dk='docker'
+alias dkb='docker build .'
+alias dkr='docker run'
+alias dkc='docker compose'
+alias dkcu='docker compose up'
+alias dkcd='docker compose down'
+alias dkl='docker logs'
+
+# GitHub Actions
+alias gha='gh workflow list'
+alias ghar='gh run list'
+alias ghaw='gh run watch'
+alias gharun='gh workflow run'
+
+# Fly.io
+alias flyd='fly deploy'
+
+# Railway
+alias rw='railway'
+alias rwd='railway up'
+
+# Render
+alias rd='render'
+
+# Cloudflare
+alias cf='wrangler'
+alias cfd='wrangler deploy'
+alias cfl='wrangler login'
+
+# --- 11. SERVERS / VPS / SSH ---
+
+# Dependencies / Install
+#
+# SSH:
+# Linux: usually preinstalled
+# Windows: winget install OpenSSH.Client
+#
+# PM2:
+# npm i -g pm2
+#
+# Docker:
+# Windows: winget install Docker.DockerDesktop
+# macOS: brew install --cask docker
+# Linux: https://docs.docker.com/engine/install/
+#
+# rsync:
+# Linux/macOS: usually preinstalled
+# Termux: pkg install rsync
+#
+# serve:
+# npm i -g serve
+#
+# systemctl, journalctl:
+# Linux systemd only
+
+# SSH
+alias sshk='ssh-keygen -t ed25519'
+alias sshl='cat ~/.ssh/id_ed25519.pub'
+alias ssha='ssh-add ~/.ssh/id_ed25519'
+alias sshc='ssh-copy-id'
+
+# Linux server utilities
+alias srv='ssh ' # for example: srv root@myserver
+alias srvls='systemctl list-units --type=service'
+alias srvstart='sudo systemctl start'
+alias srvstop='sudo systemctl stop'
+alias srvrestart='sudo systemctl restart'
+alias srvstatus='sudo systemctl status'
+
+# Logs
+alias logs='journalctl -xe'
+alias logsf='journalctl -f'
+alias nginxlog='tail -f /var/log/nginx/access.log'
+alias errlog='tail -f /var/log/nginx/error.log'
+
+# Process managers
+alias pm='pm2'
+alias pml='pm2 list'
+alias pms='pm2 start'
+alias pmr='pm2 restart'
+alias pmd='pm2 delete'
+alias pmlog='pm2 logs'
+
+# Docker server workflows
+alias dkps='docker ps'
+alias dkimg='docker images'
+alias dkprune='docker system prune'
+alias dkre='docker restart'
+
+# Remote sync
+alias scpup='scp'
+alias rs='rsync -avz'
+
+# Quick Python server
+alias pyserve='python -m http.server'
+
+# Node local server
+alias nserve='npx serve'
+
+# Static file server
+servehere() {
+    local port=${1:-8000}
+    python -m http.server "$port"
+}
+
+# Local servers
+alias serve='python -m http.server'
+alias serve8='python -m http.server 8000'
+alias serve3='python -m http.server 3000'
+
+# --- 12. BACKEND DEVELOPEMENT / LOCAL RUNTIME / API TOOLING ---
+
+# Dependencies / Install
+#
+# Python tools:
+# pip install fastapi uvicorn flask django
+# pip install "uv[all]"   # modern Python project tooling (optional)
+#
+# Node tools:
+# npm i -g express-generator
+# npm i -g @nestjs/cli
+#
+# Notes:
+# - django-admin comes with Django
+# - flask run requires FLASK_APP set
+# - uv commands assume uv (Astral) is installed: https://github.com/astral-sh/uv
+# - uvicorn is for ASGI servers (FastAPI, Starlette)
+# - curl is preinstalled on most systems
+
+# Uvicorn
+alias uv='uvicorn'
+alias uvi='uv init'
+alias uva='uv add'
+alias uvs='uv sync'
+alias uvr='uv run'
+alias uvd='uvicorn main:app --reload'
+alias uvp='uvicorn main:app --host 0.0.0.0 --port'
+
+# FastAPI
+alias fapi='fastapi'
+alias fdev='fastapi dev main.py'
+alias frun='uvicorn main:app --reload'
+
+# Django
+alias dj='django-admin'
+alias djstart='django-admin startproject'
+alias djapp='python manage.py startapp'
+alias djrun='python manage.py runserver'
+alias djmig='python manage.py makemigrations'
+alias djmigrate='python manage.py migrate'
+alias djshell='python manage.py shell'
+alias djsuper='python manage.py createsuperuser'
+alias djcollect='python manage.py collectstatic'
+
+# Flask
+alias flrun='flask run'
+
+flenv() {
+    export FLASK_APP="${1:-app.py}"
+    export FLASK_ENV=development
+    echo "Flask env set: FLASK_APP=$FLASK_APP"
+}
+# Usage:
+# flenv app.py
+# flenv main.py
+# flenv
+
+# Node backend
+alias ex='npx express-generator'
+alias nest='nest'
+alias nestnew='nest new'
+alias neststart='npm run start:dev'
+
+# API testing
+alias api='curl'
+alias apij='curl -H "Content-Type: application/json"'
+
+# --- 13. GIT AUTOCOMPLETE ---
 _git_completion_loaded=false
 
 # Try all known paths (Linux distros, macOS Homebrew, Termux)
@@ -370,10 +590,10 @@ fi
 
 unset _git_comp_path _git_completion_loaded
 
-# --- 11. DASHBOARD ---
+# --- 14. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
-# --- 12. SELF UPDATE ---
+# --- 15. SELF UPDATE ---
 wodibashupdate() {
     # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
