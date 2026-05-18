@@ -232,6 +232,44 @@ alias ports='ss -tulnp'              # what's listening (Linux) / lsof -i on mac
 alias whatsport='lsof -i'           # or ss -tulnp already there, but this is cross-platform
 alias psg='ps aux | grep'
 
+killport() {
+    if [ -z "$1" ]; then
+        echo "Usage: killport <port>"
+        return 1
+    fi
+
+    local port="$1"
+
+    # Windows Git Bash / MSYS / Cygwin
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+        pid=$(netstat -ano | grep ":$port" | awk '{print $NF}' | tail -1)
+
+        if [ -n "$pid" ]; then
+            taskkill //PID "$pid" //F
+            echo "Killed process on port $port (PID: $pid)"
+        else
+            echo "No process found on port $port"
+        fi
+
+    # Termux
+    elif [[ -n "$PREFIX" && "$PREFIX" == *termux* ]]; then
+        pkill -f ":$port" 2>/dev/null && \
+        echo "Killed process on port $port" || \
+        echo "No process found"
+
+    # Linux/macOS
+    else
+        pid=$(lsof -ti:"$port" 2>/dev/null)
+
+        if [ -n "$pid" ]; then
+            kill -9 "$pid"
+            echo "Killed process on port $port (PID: $pid)"
+        else
+            echo "No process found on port $port"
+        fi
+    fi
+}
+
 alias myip='curl -s ifconfig.me'
 alias reload='exec $SHELL -l'        # full shell reload, cleaner than source
 
@@ -239,9 +277,6 @@ alias mk='mkdir'
 mkcd() { mkdir -p "$1" && cd "$1"; }  # mkdir + cd in one
 bak()  { cp "$1" "$1.bak"; }  # quick backup any file
 empty() { > "$1"; }
-killport() {
-    fuser -k "$1"/tcp 2>/dev/null || kill -9 $(lsof -ti:"$1");
-}
 
 # alias >='>' # That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
