@@ -489,6 +489,23 @@ alias serve3='python -m http.server 3000'
 
 # --- 12. BACKEND DEVELOPEMENT / LOCAL RUNTIME / API TOOLING ---
 
+# Dependencies / Install
+#
+# Python tools:
+# pip install fastapi uvicorn flask django
+# pip install "uv[all]"   # modern Python project tooling (optional)
+#
+# Node tools:
+# npm i -g express-generator
+# npm i -g @nestjs/cli
+#
+# Notes:
+# - django-admin comes with Django
+# - flask run requires FLASK_APP set
+# - uv commands assume uv (Astral) is installed: https://github.com/astral-sh/uv
+# - uvicorn is for ASGI servers (FastAPI, Starlette)
+# - curl is preinstalled on most systems
+
 # Uvicorn
 alias uv='uvicorn'
 alias uvi='uv init'
