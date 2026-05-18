@@ -120,6 +120,7 @@ alias readme='touch README.md && code README.md'
 alias license='touch LICENSE && code LICENSE'
 
 # --- GITHUB CLI ---
+# Install GitHub CLI: https://cli.github.com/
 alias ghpr='gh pr create'
 alias ghprl='gh pr list'
 alias ghprv='gh pr view --web'
@@ -335,6 +336,16 @@ function loopmusic() {
 }
 
 # --- 10. CLOUD / DEPLOYMENT ---
+
+# Install:
+# npm i -g vercel
+# npm i -g netlify-cli
+# npm i -g firebase-tools
+# npm i -g wrangler
+# npm i -g @railway/cli
+# brew install supabase/tap/supabase
+# winget install Docker.DockerDesktop
+# Install GitHub CLI: https://cli.github.com/
 
 # Vercel
 alias vc='vercel'
