@@ -516,7 +516,16 @@ alias djcollect='python manage.py collectstatic'
 
 # Flask
 alias flrun='flask run'
-alias flenv='export FLASK_ENV=development'
+
+flenv() {
+    export FLASK_APP="${1:-app.py}"
+    export FLASK_ENV=development
+    echo "Flask env set: FLASK_APP=$FLASK_APP"
+}
+# Usage:
+# flenv app.py
+# flenv main.py
+# flenv
 
 # Node backend
 alias ex='npx express-generator'
