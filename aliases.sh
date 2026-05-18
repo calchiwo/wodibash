@@ -334,7 +334,68 @@ function loopmusic() {
     done
 }
 
-# --- 10. GIT AUTOCOMPLETE ---
+# --- 10. CLOUD / DEPLOYMENT ---
+
+# Vercel
+alias vc='vercel'
+alias vcl='vercel login'
+alias vcd='vercel dev'
+alias vcp='vercel --prod'
+alias vclog='vercel logs'
+alias vcrm='vercel remove'
+
+# Netlify
+alias nt='netlify'
+alias ntd='netlify dev'
+alias ntp='netlify deploy'
+alias ntpp='netlify deploy --prod'
+alias ntl='netlify login'
+
+# Firebase
+alias fb='firebase'
+alias fbl='firebase login'
+alias fbi='firebase init'
+alias fbd='firebase deploy'
+alias fbh='firebase hosting:channel:deploy'
+
+# Supabase
+alias sup='supabase'
+alias sups='supabase start'
+alias supst='supabase status'
+alias supdb='supabase db push'
+alias supd='supabase deploy'
+
+# Docker
+alias dk='docker'
+alias dkb='docker build .'
+alias dkr='docker run'
+alias dkc='docker compose'
+alias dkcu='docker compose up'
+alias dkcd='docker compose down'
+alias dkl='docker logs'
+
+# GitHub Actions
+alias gha='gh workflow list'
+alias ghar='gh run list'
+alias ghaw='gh run watch'
+alias gharun='gh workflow run'
+
+# Fly.io
+alias flyd='fly deploy'
+
+# Railway
+alias rw='railway'
+alias rwd='railway up'
+
+# Render
+alias rd='render'
+
+# Cloudflare
+alias cf='wrangler'
+alias cfd='wrangler deploy'
+alias cfl='wrangler login'
+
+# --- 11. GIT AUTOCOMPLETE ---
 _git_completion_loaded=false
 
 # Try all known paths (Linux distros, macOS Homebrew, Termux)
@@ -370,10 +431,10 @@ fi
 
 unset _git_comp_path _git_completion_loaded
 
-# --- 11. DASHBOARD ---
+# --- 12. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
-# --- 12. SELF UPDATE ---
+# --- 13. SELF UPDATE ---
 wodibashupdate() {
     # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
