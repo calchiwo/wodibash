@@ -408,6 +408,30 @@ alias cfl='wrangler login'
 
 # --- 11. SERVERS / VPS / SSH ---
 
+# Dependencies / Install
+#
+# SSH:
+# Linux: usually preinstalled
+# Windows: winget install OpenSSH.Client
+#
+# PM2:
+# npm i -g pm2
+#
+# Docker:
+# Windows: winget install Docker.DockerDesktop
+# macOS: brew install --cask docker
+# Linux: https://docs.docker.com/engine/install/
+#
+# rsync:
+# Linux/macOS: usually preinstalled
+# Termux: pkg install rsync
+#
+# serve:
+# npm i -g serve
+#
+# systemctl, journalctl:
+# Linux systemd only
+
 # SSH
 alias sshk='ssh-keygen -t ed25519'
 alias sshl='cat ~/.ssh/id_ed25519.pub'
