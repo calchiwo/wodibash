@@ -482,7 +482,53 @@ servehere() {
     python -m http.server "$port"
 }
 
-# --- 12. GIT AUTOCOMPLETE ---
+# Local servers
+alias serve='python -m http.server'
+alias serve8='python -m http.server 8000'
+alias serve3='python -m http.server 3000'
+
+# --- 12. BACKEND DEVELOPEMENT / LOCAL RUNTIME / API TOOLING ---
+
+# Uvicorn
+alias uv='uvicorn'
+alias uvi='uv init'
+alias uva='uv add'
+alias uvs='uv sync'
+alias uvr='uv run'
+alias uvd='uvicorn main:app --reload'
+alias uvp='uvicorn main:app --host 0.0.0.0 --port'
+
+# FastAPI
+alias fapi='fastapi'
+alias fdev='fastapi dev main.py'
+alias frun='uvicorn main:app --reload'
+
+# Django
+alias dj='django-admin'
+alias djstart='django-admin startproject'
+alias djapp='python manage.py startapp'
+alias djrun='python manage.py runserver'
+alias djmig='python manage.py makemigrations'
+alias djmigrate='python manage.py migrate'
+alias djshell='python manage.py shell'
+alias djsuper='python manage.py createsuperuser'
+alias djcollect='python manage.py collectstatic'
+
+# Flask
+alias flrun='flask run'
+alias flenv='export FLASK_ENV=development'
+
+# Node backend
+alias ex='npx express-generator'
+alias nest='nest'
+alias nestnew='nest new'
+alias neststart='npm run start:dev'
+
+# API testing
+alias api='curl'
+alias apij='curl -H "Content-Type: application/json"'
+
+# --- 13. GIT AUTOCOMPLETE ---
 _git_completion_loaded=false
 
 # Try all known paths (Linux distros, macOS Homebrew, Termux)
@@ -518,10 +564,10 @@ fi
 
 unset _git_comp_path _git_completion_loaded
 
-# --- 13. DASHBOARD ---
+# --- 14. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
-# --- 14. SELF UPDATE ---
+# --- 15. SELF UPDATE ---
 wodibashupdate() {
     # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
