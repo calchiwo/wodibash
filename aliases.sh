@@ -239,9 +239,11 @@ alias mk='mkdir'
 mkcd() { mkdir -p "$1" && cd "$1"; }  # mkdir + cd in one
 bak()  { cp "$1" "$1.bak"; }  # quick backup any file
 empty() { > "$1"; }
-killport() { kill -9 $(lsof -ti:"$1"); }
+killport() {
+    fuser -k "$1"/tcp 2>/dev/null || kill -9 $(lsof -ti:"$1");
+}
 
-# alias >='>' #That truncates a file to zero bytes while keeping it in place
+# alias >='>' # That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
 
 ## --- 7. AI ----
