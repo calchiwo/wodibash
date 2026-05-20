@@ -306,6 +306,7 @@ alias cur='cursor-agent' # curl https://cursor.com/install -fsS | bash
 alias gem='gemini' # npm i -g @google/gemini-cli
 alias cla='claude' # npm i -g @anthropic-ai/claude-code (claude code cli)
 alias omo='oh-my-codex' # npm install -g @openai/codex oh-my-codex
+alias opc='opencode' # npm i -g opencode-ai
 
 # --- 8. SEARCHING TOOLS ---
 alias rg='rg --color=auto'
