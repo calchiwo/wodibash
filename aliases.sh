@@ -104,6 +104,7 @@ alias gri='git rebase -i'
 alias grh='git rebase -i HEAD~'
 alias gcaid='git rebase --committer-date-is-author-date HEAD~'
 alias gcane='git commit --amend --no-edit'
+alias gcanee='gcane --allow-empty'
 alias grc='git rebase --continue'
 alias grs='git repo structure' # reachable objects and repository structure
 alias gres='git restore'
