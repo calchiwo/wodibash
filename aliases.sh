@@ -1,7 +1,7 @@
 # --- WODIBASH START ---
 
 # =================================================================
-# WODIBASH - BULLETPROOF TERMINAL ALIASES
+# WODIBASH : BULLETPROOF TERMINAL ALIASES
 # THAT COMPRESSES EVERYDAY WORKFLOWS FOR FASTER, SAFER SYSTEM EXECUTION
 
 #  _    _         _ _ ____            _
@@ -35,6 +35,8 @@ alias cnb='code ~/.bashrc'
 alias nz='nano ~/.zshrc'
 alias sz='source ~/.zshrc'
 alias cnz='code ~/.zshrc'
+
+alias a='alias'
 
 # Smart Clipboard (Detects OS)
 # copy current path to clipboard
@@ -138,6 +140,7 @@ alias mkv='python -m venv .venv'
 alias venv='source .venv/Scripts/activate || source .venv/bin/activate || source venv/Scripts/activate || source venv/bin/activate'
 alias vno='deactivate'
 alias newpy='mkv && venv && pip install --upgrade pip'
+alias pipupgrade='python.exe -m pip install --upgrade pip'
 alias pi='pip install '
 alias pie='pip install -e .'
 alias pyrm='pip uninstall -y'
