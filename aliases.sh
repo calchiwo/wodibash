@@ -50,6 +50,58 @@ else
     alias cpw='pwd | xclip -selection clipboard'
 fi
 
+
+# Copy file contents to clipboard
+copy() {
+    local file="$1"
+
+    # Check if file exists
+    if [[ ! -f "$file" ]]; then
+        echo "Error: File '$file' not found"
+        return 1
+    fi
+
+    # Detect OS and use appropriate clipboard command
+    case "$(uname -s)" in
+        Darwin)
+            # macOS
+            cat "$file" | pbcopy
+            echo "✅ Copied '$file' to clipboard (macOS)"
+            ;;
+        Linux)
+            # Check for Termux
+            if command -v termux-clipboard-set &> /dev/null; then
+                cat "$file" | termux-clipboard-set
+                echo "✅ Copied '$file' to clipboard (Termux)"
+            # Check for WSL (Windows Subsystem for Linux)
+            elif grep -q Microsoft /proc/version 2>/dev/null; then
+                cat "$file" | clip.exe
+                echo "✅ Copied '$file' to clipboard (WSL)"
+            # Regular Linux with X11
+            elif command -v xclip &> /dev/null; then
+                cat "$file" | xclip -selection clipboard
+                echo "✅ Copied '$file' to clipboard (Linux/X11)"
+            elif command -v xsel &> /dev/null; then
+                cat "$file" | xsel --clipboard --input
+                echo "✅ Copied '$file' to clipboard (Linux/X11)"
+            else
+                echo "❌ Error: No clipboard tool found. Install xclip or xsel."
+                return 1
+            fi
+            ;;
+        CYGWIN*|MINGW*|MSYS*)
+            # Git Bash / Cygwin / MSYS on Windows
+            cat "$file" | clip.exe
+            echo "✅ Copied '$file' to clipboard (Windows/Git Bash)"
+            ;;
+        *)
+            echo "❌ Error: Unsupported OS: $(uname -s)"
+            return 1
+            ;;
+    esac
+}
+
+
 # --- 2. GIT WORKFLOW --
 alias ga='git add '
 alias gc='git commit -m'
