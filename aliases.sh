@@ -175,6 +175,10 @@ alias ginit='git init && git add . && git commit -m "Initial commit"'
 alias readme='touch README.md && code README.md'
 alias license='touch LICENSE && code LICENSE'
 
+alias gitssh='git remote set-url origin $(git remote get-url origin | sed "s/https:\/\/github.com\//git@github.com:/")'
+alias githttps='git remote set-url origin $(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//")'
+
+
 # --- GITHUB CLI ---
 # Install GitHub CLI: https://cli.github.com/
 alias ghpr='gh pr create'
