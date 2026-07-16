@@ -656,6 +656,9 @@ unset _git_comp_path _git_completion_loaded
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
 # --- 15. SELF UPDATE ---
+
+alias wbu='wodibashupdate'
+
 wodibashupdate() {
     # Pull latest or clone fresh
     if [ -d ~/wodibash ]; then
