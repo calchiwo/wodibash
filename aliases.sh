@@ -179,7 +179,148 @@ alias gitssh='git remote set-url origin $(git remote get-url origin | sed "s/htt
 alias githttps='git remote set-url origin $(git remote get-url origin | sed "s/git@github.com:/https:\/\/github.com\//")'
 
 
-# --- GITHUB CLI ---
+# --- 3. SSH SETUP HELPERS ---
+
+sshgen() {
+    local email="${1:-$(git config user.email)}"
+    local key_name="${2:-id_ed25519}"
+    
+    if [[ -z "$email" ]]; then
+        echo "Error: No email found. Usage: sshgen <email> [key_name]"
+        echo "  Example: sshgen example@gmail.com"
+        echo "  Example: sshgen example@gmail.com mykey"
+        return 1
+    fi
+    
+    local key_path="$HOME/.ssh/${key_name}"
+    
+    if [[ -f "$key_path" ]]; then
+        read -rp "Key '$key_name' already exists. Overwrite? [y/N] " confirm
+        if [[ ! "$confirm" == [yY] ]]; then
+            echo "Cancelled."
+            return 1
+        fi
+    fi
+    
+    echo "Generating SSH key: $key_path"
+    ssh-keygen -t ed25519 -C "$email" -f "$key_path"
+    
+    eval "$(ssh-agent -s)"
+    ssh-add "$key_path"
+    
+    echo "SSH key generated and added to agent"
+    echo "Public key:"
+    cat "${key_path}.pub"
+    echo ""
+    echo "Next: copy the public key and add it to GitHub"
+    echo "  sshcopy ${key_name}"
+}
+
+sshcopy() {
+    local key_name="${1:-id_ed25519}"
+    local key_path="$HOME/.ssh/${key_name}.pub"
+    
+    if [[ ! -f "$key_path" ]]; then
+        echo "Error: Key not found: $key_path"
+        echo "Available keys:"
+        ls -1 ~/.ssh/*.pub 2>/dev/null || echo "No .pub files found"
+        return 1
+    fi
+    
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+        cat "$key_path" | clip
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        cat "$key_path" | pbcopy
+    elif [[ -n "$PREFIX" && "$PREFIX" == *termux* ]]; then
+        cat "$key_path" | termux-clipboard-set
+    else
+        cat "$key_path" | xclip -selection clipboard
+    fi
+    
+    echo "Your SSH public key copied to your clipboard"
+    echo "Key: $(cat "$key_path")"
+    echo ""
+    echo "Add it to:"
+    echo "  GitHub:   https://github.com/settings/ssh/new"
+    echo "  GitLab:   https://gitlab.com/-/profile/keys"
+    echo "  Bitbucket: https://bitbucket.org/account/settings/ssh-keys/"
+}
+
+sshtest() {
+    echo "Testing SSH connection to GitHub..."
+    local result
+    result=$(ssh -T git@github.com 2>&1)
+    
+    if [[ "$result" == *"successfully authenticated"* ]]; then
+        echo "SSH connection successful"
+        echo "  $result"
+        return 0
+    else
+        echo "SSH connection failed"
+        echo "  $result"
+        echo ""
+        echo "Troubleshooting:"
+        echo "  1. Make sure you added the public key to GitHub"
+        echo "  2. Run: sshcopy  (to copy your public key)"
+        echo "  3. Add it at: https://github.com/settings/ssh/new"
+        return 1
+    fi
+}
+
+sshsetup() {
+    local email="${1:-$(git config user.email)}"
+    
+    if [[ -z "$email" ]]; then
+        echo "Error: No email found. Please provide email:"
+        echo "  Usage: sshsetup <email>"
+        echo "  Example: sshsetup example@gmail.com"
+        return 1
+    fi
+    
+    echo "Setting up SSH for GitHub..."
+    echo ""
+    
+    sshgen "$email" || return 1
+    echo ""
+    
+    sshcopy || return 1
+    echo ""
+    
+    read -rp "Press Enter after you've added the key to GitHub..."
+    echo ""
+    
+    sshtest
+}
+
+sshlist() {
+    echo "Available SSH keys:"
+    echo "-------------------"
+    for key in ~/.ssh/*.pub; do
+        if [[ -f "$key" ]]; then
+            local name=$(basename "$key" .pub)
+            local fingerprint=$(ssh-keygen -l -f "$key" 2>/dev/null | awk '{print $1, $2}')
+            echo "  $name: $fingerprint"
+        fi
+    done
+}
+
+sshfix() {
+    echo "Fixing SSH permissions..."
+    chmod 700 ~/.ssh
+    chmod 600 ~/.ssh/id_ed25519 2>/dev/null
+    chmod 644 ~/.ssh/id_ed25519.pub 2>/dev/null
+    chmod 600 ~/.ssh/id_rsa 2>/dev/null
+    chmod 644 ~/.ssh/id_rsa.pub 2>/dev/null
+    echo "Permissions fixed"
+    
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519 2>/dev/null
+    ssh-add ~/.ssh/id_rsa 2>/dev/null
+    echo "ssh-agent restarted and keys added"
+}
+
+
+# --- 4. GITHUB CLI ---
 # Install GitHub CLI: https://cli.github.com/
 alias ghpr='gh pr create'
 alias ghprl='gh pr list'
@@ -188,7 +329,7 @@ alias ghrn='gh release create'
 alias ghrl='gh release list'
 alias ghre='gh repo view --web'
 
-# --- 3. PYTHON MASTER BLOCK ---
+# --- 5. PYTHON MASTER BLOCK ---
 alias p='python'
 alias p312='/c/Users/Lenovo/AppData/Local/Programs/Python/Python312/python.exe'
 alias p314='/c/Users/Lenovo/AppData/Local/Programs/Python/Python314/python.exe'
@@ -224,7 +365,7 @@ alias pytv='pytest -v'
 alias pytx='pytest -x'
 alias pyc='python -c'
 
-# --- 4. NPM, PNPM & WEB DEV ---
+# --- 6. NPM, PNPM & WEB DEV ---
 alias ni='npm install'
 alias nl='npm login'
 alias nlo='npm logout'
@@ -266,7 +407,7 @@ alias pnr='pnpm run'
 alias pna='pnpm add'
 alias pnx='pnpm dlx'
 
-# --- 5. RUST/CARGO ---
+# --- 7. RUST/CARGO ---
 alias cb='cargo build'
 alias cr='cargo run'
 alias ct='cargo test'
@@ -279,7 +420,7 @@ alias cdoc='cargo doc --open'
 alias cnew='cargo new'
 alias cadd='cargo add'
 
-# --- 6. SHELL / PROCESSES / NETWORKING ---
+# --- 8. SHELL / PROCESSES / NETWORKING ---
 alias c='code'
 alias c.='code .'
 
@@ -343,7 +484,7 @@ empty() { > "$1"; }
 # alias >='>' # That truncates a file to zero bytes while keeping it in place
 alias empty='f(){ > "$1"; }; f'
 
-## --- 7. AI ----
+## --- 9. AI ----
 
 # Local LLM
 alias o='ollama'
@@ -368,7 +509,7 @@ alias cla='claude' # npm i -g @anthropic-ai/claude-code (claude code cli)
 alias omo='oh-my-codex' # npm install -g @openai/codex oh-my-codex
 alias opc='opencode' # npm i -g opencode-ai
 
-# --- 8. SEARCHING TOOLS ---
+# --- 10. SEARCHING TOOLS ---
 alias rg='rg --color=auto'
 alias fd='fd --color=auto'
 alias grep='grep --color=auto'
@@ -380,7 +521,7 @@ alias wl='wodilist' # pip install wodilist
 alias etr='explainthisrepo' # pip install explainthisrepo
 alias fmtree='filemaptree' # pip install filemaptree
 
-# --- 9. LOOPING MUSIC ---
+# --- 11. LOOPING MUSIC ---
 function loopmusic() {
     if [ -z "$1" ]; then
         echo "Usage: loopmusic <file>"
@@ -397,7 +538,7 @@ function loopmusic() {
     done
 }
 
-# --- 10. CLOUD / DEPLOYMENT ---
+# --- 12. CLOUD / DEPLOYMENT ---
 
 # Install:
 # npm i -g vercel
@@ -468,7 +609,7 @@ alias cf='wrangler'
 alias cfd='wrangler deploy'
 alias cfl='wrangler login'
 
-# --- 11. SERVERS / VPS / SSH ---
+# --- 13. SERVERS / VPS / SSH ---
 
 # Dependencies / Install
 #
@@ -549,7 +690,7 @@ alias serve='python -m http.server'
 alias serve8='python -m http.server 8000'
 alias serve3='python -m http.server 3000'
 
-# --- 12. BACKEND DEVELOPEMENT / LOCAL RUNTIME / API TOOLING ---
+# --- 14. BACKEND DEVELOPEMENT / LOCAL RUNTIME / API TOOLING ---
 
 # Dependencies / Install
 #
@@ -616,7 +757,7 @@ alias neststart='npm run start:dev'
 alias api='curl'
 alias apij='curl -H "Content-Type: application/json"'
 
-# --- 13. GIT AUTOCOMPLETE ---
+# --- 15. GIT AUTOCOMPLETE ---
 _git_completion_loaded=false
 
 # Try all known paths (Linux distros, macOS Homebrew, Termux)
@@ -652,10 +793,10 @@ fi
 
 unset _git_comp_path _git_completion_loaded
 
-# --- 14. DASHBOARD ---
+# --- 16. DASHBOARD ---
 alias helpme='echo "--- GIT ALIASES ---" && alias | grep -E "^alias g" | sed "s/alias //g" | column -t -s "=" && echo "" && echo "--- NAV, PKG & SYSTEM ---" && alias | grep -vE "(^alias g|helpme)" | sed "s/alias //g" | column -t -s "="'
 
-# --- 15. SELF UPDATE ---
+# --- 17. SELF UPDATE ---
 
 alias wbu='wodibashupdate'
 
