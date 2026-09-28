@@ -98,6 +98,13 @@ wodibashupdate
 
 <details>
 
+### Download from GitHub Release (no git required)
+- Go to the [latest release](https://github.com/calchiwo/wodibash/releases/latest)
+- Download `aliases.sh` from the assets
+- Open your shell config: `nano ~/.bashrc` (or `~/.zshrc` on macOS)
+- Paste the contents at the bottom
+- Save and run `source ~/.bashrc`
+
 ### For Bash
 
 ```bash

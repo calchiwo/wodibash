@@ -1,0 +1,99 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Publish GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Hard stop if aliases.sh is missing (never ship a broken release)
+      - name: Verify aliases.sh exists
+        run: |
+          if [ ! -f aliases.sh ]; then
+            echo "aliases.sh not found. Aborting release."
+            exit 1
+          fi
+
+      # Hard stop if markers are missing (wodibashupdate depends on them)
+      - name: Verify WODIBASH markers are present
+        run: |
+          if ! grep -q "# --- WODIBASH START ---" aliases.sh; then
+            echo "Missing WODIBASH START marker. Aborting release."
+            exit 1
+          fi
+          if ! grep -q "# --- WODIBASH END ---" aliases.sh; then
+            echo "Missing WODIBASH END marker. Aborting release."
+            exit 1
+          fi
+
+      # Strip Windows CRLF line endings before shipping
+      # Prevents syntax errors when .bashrc is patched on Linux/macOS/Termux
+      - name: Normalize line endings
+        run: |
+          sed -i 's/\r//' aliases.sh
+
+      # Generate a SHA256 checksum so users can verify the download
+      - name: Generate checksum
+        run: |
+          sha256sum aliases.sh > aliases.sh.sha256
+          cat aliases.sh.sha256
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "${{ github.ref_name }} - Bulletproof"
+          files: |
+            aliases.sh
+            aliases.sh.sha256
+          generate_release_notes: false
+          body: |
+            WodiBash turns multi-step workflows into single commands, eliminates repetitive typing, enforces safer defaults for destructive operations, and removes the need to remember long command sequences.
+
+            ---
+
+            ## Install
+
+            **Manual (recommended for first time)**
+            - Download `aliases.sh` from the assets below
+            - Open your shell config: `nano ~/.bashrc` (or `~/.zshrc` on macOS)
+            - Paste the contents at the bottom
+            - Save and run `source ~/.bashrc`
+
+            **Bash (Linux / Windows Git Bash / Termux / macOS via Bash)**
+            ```bash
+            git clone https://github.com/calchiwo/wodibash.git && cat wodibash/aliases.sh >> ~/.bashrc && source ~/.bashrc
+            wodibashupdate
+            ```
+
+            **macOS (zsh)**
+            ```zsh
+            git clone https://github.com/calchiwo/wodibash.git && cat wodibash/aliases.sh >> ~/.zshrc && source ~/.zshrc
+            wodibashupdate
+            ```
+
+            **Quick One-liner (made for you!):**
+            ```bash
+            curl -fsSL https://raw.githubusercontent.com/calchiwo/wodibash/main/install.sh | bash
+            ```
+
+            **Already installed? Just run:**
+            ```bash
+            wodibashupdate
+            ```
+
+            **Verify your download:**
+            ```bash
+            sha256sum -c aliases.sh.sha256
+            ```
