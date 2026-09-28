@@ -96,7 +96,6 @@ wodibashupdate
 
 ## Other Installation
 
-<details>
 
 ### Download from GitHub Release (no git required)
 - Go to the [latest release](https://github.com/calchiwo/wodibash/releases/latest)
@@ -104,6 +103,12 @@ wodibashupdate
 - Open your shell config: `nano ~/.bashrc` (or `~/.zshrc` on macOS)
 - Paste the contents at the bottom
 - Save and run `source ~/.bashrc`
+
+### Quick One-liner (made for you!)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/calchiwo/wodibash/main/install.sh | bash
+```
 
 ### For Bash
 
@@ -118,8 +123,6 @@ wodibashupdate
 curl -s https://raw.githubusercontent.com/calchiwo/wodibash/main/aliases.sh >> ~/.zshrc && source ~/.zshrc
 wodibashupdate
 ```
-
-</details>
 
 ## Discover commands
 
