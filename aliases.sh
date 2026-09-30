@@ -846,4 +846,33 @@ wodibashupdate() {
     echo "wodibash updated!"
 }
 
+# --- 18. UNINSTALL ---
+
+wodibashuninstall() {
+    local bashrc=~/.bashrc
+    local start="# --- WODIBASH START ---"
+    local end="# --- WODIBASH END ---"
+
+    # Check if wodibash is actually installed
+    if ! grep -q "$start" "$bashrc" 2>/dev/null; then
+        echo "wodibash is not installed in $bashrc. Nothing to remove."
+        return 0
+    fi
+
+    # Backup before touching anything
+    cp "$bashrc" "$bashrc.bak"
+    echo "Backed up $bashrc to $bashrc.bak"
+
+    # Remove everything between markers (inclusive) and leave the rest untouched
+    local tmp
+    tmp=$(mktemp)
+    awk -v start="$start" -v end="$end" '
+        $0 == start { in_block=1; next }
+        $0 == end   { in_block=0; next }
+        !in_block   { print }
+    ' "$bashrc" > "$tmp" && mv "$tmp" "$bashrc"
+
+    echo "wodibash uninstalled. Restart your terminal or run: source ~/.bashrc"
+}
+
 # --- WODIBASH END ---
